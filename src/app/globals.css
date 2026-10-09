@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* ── Snap Count "Friday Night Lights" tokens ──────────────────────────
+   Dark is the default. Turf green / blitz red are for semantic data
+   movement ONLY (favorable vs. unfavorable) — never decoration. */
+:root {
+  --bg: #0b1220;        /* Midnight Navy */
+  --panel: #1b2638;     /* Charcoal Slate */
+  --text: #f2efe6;      /* Chalk */
+  --muted: #9aa3b2;
+  --accent: #f2a93b;    /* Stadium Amber */
+  --up: #4caf7d;        /* Turf Green */
+  --down: #e2645a;      /* Blitz Red */
+  --line: #2a3650;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f7f4ec;
+    --panel: #ece7da;
+    --text: #1b2438;
+    --muted: #5b6475;
+    --accent: #b8791a;
+    --up: #2e8a5a;
+    --down: #c2463c;
+    --line: #d9d2c1;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f7f4ec;
+  --panel: #ece7da;
+  --text: #1b2438;
+  --muted: #5b6475;
+  --accent: #b8791a;
+  --up: #2e8a5a;
+  --down: #c2463c;
+  --line: #d9d2c1;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-line: var(--line);
+  --font-display: var(--font-oswald);
+  --font-serif: var(--font-source-serif);
+  --font-mono: var(--font-plex-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-source-serif), Georgia, serif;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
