@@ -1,0 +1,1463 @@
+{
+  "files": {
+    "regular-week-01/drives.json.gz": {
+      "bytes": 1281997,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:00:53.689Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 2323,
+      "source": "cfbd"
+    },
+    "regular-week-01/elo.json": {
+      "bytes": 9543,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:00:55.222Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-01/fpi-espn.json": {
+      "bytes": 127121,
+      "endpoint": "/seasons/2026/types/2/weeks/1/powerindex",
+      "fetchedAt": "2026-10-13T01:00:57.697Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-01/lines.json": {
+      "bytes": 102058,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:00:56.082Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 170,
+      "source": "cfbd"
+    },
+    "regular-week-01/player-box.json.gz": {
+      "bytes": 3137749,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T00:59:40.891Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 99,
+      "source": "cfbd"
+    },
+    "regular-week-01/player-passing.json.gz": {
+      "bytes": 1188353,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:00:42.979Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 262,
+      "source": "cfbd"
+    },
+    "regular-week-01/player-ppa-games.json": {
+      "bytes": 955128,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T00:59:44.541Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 4745,
+      "source": "cfbd"
+    },
+    "regular-week-01/player-rushing.json.gz": {
+      "bytes": 1561916,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:00:50.373Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 893,
+      "source": "cfbd"
+    },
+    "regular-week-01/player-success-games.json": {
+      "bytes": 695309,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:00:04.542Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 2345,
+      "source": "cfbd"
+    },
+    "regular-week-01/pregame-wp.json": {
+      "bytes": 26777,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:00:56.668Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 170,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-advanced.json": {
+      "bytes": 753915,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T00:59:42.837Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 408,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-box.json": {
+      "bytes": 273018,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T00:59:37.978Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 99,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-havoc.json": {
+      "bytes": 221814,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T00:59:43.297Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 400,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-passing.json.gz": {
+      "bytes": 1336400,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:00:18.734Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 150,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-ppa-games.json": {
+      "bytes": 53592,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T00:59:43.907Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 150,
+      "source": "cfbd"
+    },
+    "regular-week-01/team-rushing.json": {
+      "bytes": 530605,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:00:35.750Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 1,
+        "year": 2026
+      },
+      "rows": 150,
+      "source": "cfbd"
+    },
+    "regular-week-02/drives.json.gz": {
+      "bytes": 1126101,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:01:36.749Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 2046,
+      "source": "cfbd"
+    },
+    "regular-week-02/elo.json": {
+      "bytes": 9543,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:01:38.650Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-02/fpi-espn.json": {
+      "bytes": 128538,
+      "endpoint": "/seasons/2026/types/2/weeks/2/powerindex",
+      "fetchedAt": "2026-10-13T01:01:42.592Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-02/lines.json": {
+      "bytes": 75735,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:01:39.173Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 120,
+      "source": "cfbd"
+    },
+    "regular-week-02/player-box.json.gz": {
+      "bytes": 2681465,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T01:01:02.468Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 86,
+      "source": "cfbd"
+    },
+    "regular-week-02/player-passing.json.gz": {
+      "bytes": 1056080,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:01:33.397Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 233,
+      "source": "cfbd"
+    },
+    "regular-week-02/player-ppa-games.json": {
+      "bytes": 634245,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T01:01:06.250Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 3168,
+      "source": "cfbd"
+    },
+    "regular-week-02/player-rushing.json.gz": {
+      "bytes": 1332621,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:01:36.158Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 762,
+      "source": "cfbd"
+    },
+    "regular-week-02/player-success-games.json": {
+      "bytes": 448407,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:01:27.572Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 1518,
+      "source": "cfbd"
+    },
+    "regular-week-02/pregame-wp.json": {
+      "bytes": 18782,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:01:42.012Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 120,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-advanced.json": {
+      "bytes": 484753,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T01:01:04.536Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 262,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-box.json": {
+      "bytes": 237036,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T01:00:58.644Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 86,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-havoc.json": {
+      "bytes": 142056,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T01:01:04.969Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 258,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-passing.json.gz": {
+      "bytes": 1202903,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:01:29.446Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 135,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-ppa-games.json": {
+      "bytes": 48075,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T01:01:05.671Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 135,
+      "source": "cfbd"
+    },
+    "regular-week-02/team-rushing.json": {
+      "bytes": 478492,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:01:31.709Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 2,
+        "year": 2026
+      },
+      "rows": 135,
+      "source": "cfbd"
+    },
+    "regular-week-03/drives.json": {
+      "bytes": 963982,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:02:14.503Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 1753,
+      "source": "cfbd"
+    },
+    "regular-week-03/elo.json": {
+      "bytes": 9543,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:02:14.929Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-03/fpi-espn.json": {
+      "bytes": 128698,
+      "endpoint": "/seasons/2026/types/2/weeks/3/powerindex",
+      "fetchedAt": "2026-10-13T01:02:17.739Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-03/lines.json": {
+      "bytes": 73561,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:02:15.337Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 119,
+      "source": "cfbd"
+    },
+    "regular-week-03/player-box.json.gz": {
+      "bytes": 2246642,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T01:01:45.697Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 75,
+      "source": "cfbd"
+    },
+    "regular-week-03/player-passing.json": {
+      "bytes": 898401,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:02:12.649Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 198,
+      "source": "cfbd"
+    },
+    "regular-week-03/player-ppa-games.json": {
+      "bytes": 579545,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T01:01:49.288Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 2891,
+      "source": "cfbd"
+    },
+    "regular-week-03/player-rushing.json.gz": {
+      "bytes": 1185117,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:02:13.828Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 677,
+      "source": "cfbd"
+    },
+    "regular-week-03/player-success-games.json": {
+      "bytes": 397523,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:02:08.306Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 1344,
+      "source": "cfbd"
+    },
+    "regular-week-03/pregame-wp.json": {
+      "bytes": 18619,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:02:15.714Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 119,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-advanced.json": {
+      "bytes": 474169,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T01:01:47.827Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 256,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-box.json": {
+      "bytes": 206462,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T01:01:44.400Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 75,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-havoc.json": {
+      "bytes": 139254,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T01:01:48.231Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 253,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-passing.json.gz": {
+      "bytes": 1176078,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:10.064Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 132,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-ppa-games.json": {
+      "bytes": 46872,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T01:01:48.823Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 132,
+      "source": "cfbd"
+    },
+    "regular-week-03/team-rushing.json": {
+      "bytes": 467290,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:11.680Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 3,
+        "year": 2026
+      },
+      "rows": 132,
+      "source": "cfbd"
+    },
+    "regular-week-04/drives.json": {
+      "bytes": 895226,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:02:38.798Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 1627,
+      "source": "cfbd"
+    },
+    "regular-week-04/elo.json": {
+      "bytes": 9543,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:02:39.213Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-04/fpi-espn.json": {
+      "bytes": 128272,
+      "endpoint": "/seasons/2026/types/2/weeks/4/powerindex",
+      "fetchedAt": "2026-10-13T01:02:40.576Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-04/lines.json": {
+      "bytes": 72683,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:02:39.607Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 120,
+      "source": "cfbd"
+    },
+    "regular-week-04/player-box.json.gz": {
+      "bytes": 2132277,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T01:02:19.807Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 71,
+      "source": "cfbd"
+    },
+    "regular-week-04/player-passing.json": {
+      "bytes": 853476,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:02:37.018Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 188,
+      "source": "cfbd"
+    },
+    "regular-week-04/player-ppa-games.json": {
+      "bytes": 567986,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T01:02:22.178Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 2841,
+      "source": "cfbd"
+    },
+    "regular-week-04/player-rushing.json.gz": {
+      "bytes": 1128389,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:02:38.054Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 645,
+      "source": "cfbd"
+    },
+    "regular-week-04/player-success-games.json": {
+      "bytes": 380681,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:02:33.197Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 1289,
+      "source": "cfbd"
+    },
+    "regular-week-04/pregame-wp.json": {
+      "bytes": 18721,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:02:39.980Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 120,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-advanced.json": {
+      "bytes": 455503,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T01:02:20.622Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 246,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-box.json": {
+      "bytes": 197402,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T01:02:18.192Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 71,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-havoc.json": {
+      "bytes": 135590,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T01:02:21.021Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 245,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-passing.json.gz": {
+      "bytes": 1149570,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:34.720Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 129,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-ppa-games.json": {
+      "bytes": 45851,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T01:02:21.668Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 129,
+      "source": "cfbd"
+    },
+    "regular-week-04/team-rushing.json": {
+      "bytes": 456288,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:36.166Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 4,
+        "year": 2026
+      },
+      "rows": 129,
+      "source": "cfbd"
+    },
+    "regular-week-05/drives.json": {
+      "bytes": 764283,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:02:59.423Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 1390,
+      "source": "cfbd"
+    },
+    "regular-week-05/elo.json": {
+      "bytes": 9542,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:03:00.066Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-05/fpi-espn.json": {
+      "bytes": 128144,
+      "endpoint": "/seasons/2026/types/2/weeks/5/powerindex",
+      "fetchedAt": "2026-10-13T01:03:01.966Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-05/lines.json": {
+      "bytes": 67608,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:03:00.527Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 114,
+      "source": "cfbd"
+    },
+    "regular-week-05/player-box.json.gz": {
+      "bytes": 1719899,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T01:02:42.182Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 59,
+      "source": "cfbd"
+    },
+    "regular-week-05/player-passing.json": {
+      "bytes": 762350,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:02:57.788Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 168,
+      "source": "cfbd"
+    },
+    "regular-week-05/player-ppa-games.json": {
+      "bytes": 511026,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T01:02:44.647Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 2557,
+      "source": "cfbd"
+    },
+    "regular-week-05/player-rushing.json.gz": {
+      "bytes": 1023065,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:02:58.761Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 585,
+      "source": "cfbd"
+    },
+    "regular-week-05/player-success-games.json": {
+      "bytes": 344860,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:02:53.769Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 1170,
+      "source": "cfbd"
+    },
+    "regular-week-05/pregame-wp.json": {
+      "bytes": 17789,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:03:00.900Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 114,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-advanced.json": {
+      "bytes": 422837,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T01:02:43.043Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 228,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-box.json": {
+      "bytes": 161830,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T01:02:41.027Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 59,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-havoc.json": {
+      "bytes": 126349,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T01:02:43.459Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 228,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-passing.json.gz": {
+      "bytes": 1024611,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:55.431Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 115,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-ppa-games.json": {
+      "bytes": 40801,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T01:02:44.163Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 115,
+      "source": "cfbd"
+    },
+    "regular-week-05/team-rushing.json": {
+      "bytes": 407351,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:02:56.947Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 5,
+        "year": 2026
+      },
+      "rows": 115,
+      "source": "cfbd"
+    },
+    "regular-week-06/drives.json": {
+      "bytes": 736710,
+      "endpoint": "/drives",
+      "fetchedAt": "2026-10-13T01:03:22.107Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 1337,
+      "source": "cfbd"
+    },
+    "regular-week-06/elo.json": {
+      "bytes": 9541,
+      "endpoint": "/ratings/elo",
+      "fetchedAt": "2026-10-13T01:03:22.680Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-06/fpi-cfbd.json": {
+      "bytes": 42769,
+      "endpoint": "/ratings/fpi",
+      "fetchedAt": "2026-10-13T01:03:25.032Z",
+      "note": "Current ratings as of fetch time; CFBD has no per-week history for this endpoint.",
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "regular-week-06/fpi-espn.json": {
+      "bytes": 128404,
+      "endpoint": "/seasons/2026/types/2/weeks/6/powerindex",
+      "fetchedAt": "2026-10-13T01:03:24.229Z",
+      "rows": 138,
+      "source": "espn",
+      "unmatchedTeamIds": []
+    },
+    "regular-week-06/lines.json": {
+      "bytes": 62267,
+      "endpoint": "/lines",
+      "fetchedAt": "2026-10-13T01:03:23.073Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 104,
+      "source": "cfbd"
+    },
+    "regular-week-06/player-box.json.gz": {
+      "bytes": 1653476,
+      "endpoint": "/games/players",
+      "fetchedAt": "2026-10-13T01:03:03.656Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 58,
+      "source": "cfbd"
+    },
+    "regular-week-06/player-passing.json": {
+      "bytes": 740018,
+      "endpoint": "/passing/players/games",
+      "fetchedAt": "2026-10-13T01:03:20.491Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 163,
+      "source": "cfbd"
+    },
+    "regular-week-06/player-ppa-games.json": {
+      "bytes": 465470,
+      "endpoint": "/ppa/players/games",
+      "fetchedAt": "2026-10-13T01:03:06.055Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 2323,
+      "source": "cfbd"
+    },
+    "regular-week-06/player-rushing.json.gz": {
+      "bytes": 1013547,
+      "endpoint": "/rushing/players/games",
+      "fetchedAt": "2026-10-13T01:03:21.513Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 579,
+      "source": "cfbd"
+    },
+    "regular-week-06/player-success-games.json": {
+      "bytes": 316081,
+      "endpoint": "/stats/player/success/game",
+      "fetchedAt": "2026-10-13T01:03:15.539Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 1069,
+      "source": "cfbd"
+    },
+    "regular-week-06/pregame-wp.json": {
+      "bytes": 16238,
+      "endpoint": "/metrics/wp/pregame",
+      "fetchedAt": "2026-10-13T01:03:23.476Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 104,
+      "source": "cfbd"
+    },
+    "regular-week-06/sp.json": {
+      "bytes": 72210,
+      "endpoint": "/ratings/sp",
+      "fetchedAt": "2026-10-13T01:03:24.685Z",
+      "note": "Current ratings as of fetch time; CFBD has no per-week history for this endpoint.",
+      "rows": 139,
+      "source": "cfbd"
+    },
+    "regular-week-06/srs-expanded.json": {
+      "bytes": 33295,
+      "endpoint": "/ratings/srs/expanded",
+      "fetchedAt": "2026-10-13T01:03:25.738Z",
+      "note": "Current ratings as of fetch time; CFBD has no per-week history for this endpoint.",
+      "rows": 266,
+      "source": "cfbd"
+    },
+    "regular-week-06/srs.json": {
+      "bytes": 27381,
+      "endpoint": "/ratings/srs",
+      "fetchedAt": "2026-10-13T01:03:25.376Z",
+      "note": "Current ratings as of fetch time; CFBD has no per-week history for this endpoint.",
+      "rows": 268,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-advanced.json": {
+      "bytes": 396499,
+      "endpoint": "/stats/game/advanced",
+      "fetchedAt": "2026-10-13T01:03:04.424Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 214,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-box.json": {
+      "bytes": 158251,
+      "endpoint": "/games/teams",
+      "fetchedAt": "2026-10-13T01:03:02.404Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 58,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-havoc.json": {
+      "bytes": 116925,
+      "endpoint": "/stats/game/havoc",
+      "fetchedAt": "2026-10-13T01:03:04.826Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 212,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-passing.json.gz": {
+      "bytes": 1033501,
+      "endpoint": "/passing/teams/games",
+      "fetchedAt": "2026-10-13T01:03:17.268Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 116,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-ppa-games.json": {
+      "bytes": 41271,
+      "endpoint": "/ppa/games",
+      "fetchedAt": "2026-10-13T01:03:05.565Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 116,
+      "source": "cfbd"
+    },
+    "regular-week-06/team-rushing.json": {
+      "bytes": 410641,
+      "endpoint": "/rushing/teams/games",
+      "fetchedAt": "2026-10-13T01:03:19.592Z",
+      "params": {
+        "seasonType": "regular",
+        "week": 6,
+        "year": 2026
+      },
+      "rows": 116,
+      "source": "cfbd"
+    },
+    "season/calendar.json": {
+      "bytes": 3386,
+      "endpoint": "/calendar",
+      "fetchedAt": "2026-10-13T00:58:52.748Z",
+      "rows": 16,
+      "source": "cfbd"
+    },
+    "season/coaches.json": {
+      "bytes": 46738,
+      "endpoint": "/coaches",
+      "fetchedAt": "2026-10-13T00:59:37.511Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/conference-sp.json": {
+      "bytes": 5412,
+      "endpoint": "/ratings/sp/conferences",
+      "fetchedAt": "2026-10-13T00:59:31.153Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 11,
+      "source": "cfbd"
+    },
+    "season/games.json": {
+      "bytes": 675428,
+      "endpoint": "/games",
+      "fetchedAt": "2026-10-13T00:58:53.291Z",
+      "params": {
+        "classification": "fbs",
+        "seasonType": "regular",
+        "year": 2026
+      },
+      "rows": 888,
+      "source": "cfbd"
+    },
+    "season/player-ppa-season.json.gz": {
+      "bytes": 2054679,
+      "endpoint": "/ppa/players/season",
+      "fetchedAt": "2026-10-13T00:59:16.458Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 5038,
+      "source": "cfbd"
+    },
+    "season/player-season-stats.json.gz": {
+      "bytes": 23379211,
+      "endpoint": "/stats/player/season",
+      "fetchedAt": "2026-10-13T00:59:13.057Z",
+      "params": {
+        "seasonType": "regular",
+        "year": 2026
+      },
+      "rows": 134375,
+      "source": "cfbd"
+    },
+    "season/player-success-season.json": {
+      "bytes": 643389,
+      "endpoint": "/stats/player/success",
+      "fetchedAt": "2026-10-13T00:59:28.238Z",
+      "params": {
+        "seasonType": "regular",
+        "year": 2026
+      },
+      "rows": 2915,
+      "source": "cfbd"
+    },
+    "season/player-usage.json.gz": {
+      "bytes": 1280357,
+      "endpoint": "/player/usage",
+      "fetchedAt": "2026-10-13T00:59:30.285Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 5038,
+      "source": "cfbd"
+    },
+    "season/polls.json": {
+      "bytes": 94283,
+      "endpoint": "/rankings",
+      "fetchedAt": "2026-10-13T00:58:53.682Z",
+      "params": {
+        "seasonType": "regular",
+        "year": 2026
+      },
+      "rows": 7,
+      "source": "cfbd"
+    },
+    "season/ratings-core.json": {
+      "bytes": 29560,
+      "endpoint": "/ratings/core",
+      "fetchedAt": "2026-10-13T00:59:31.498Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/records.json": {
+      "bytes": 356622,
+      "endpoint": "/records",
+      "fetchedAt": "2026-10-13T00:58:54.156Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 682,
+      "source": "cfbd"
+    },
+    "season/recruiting-teams.json": {
+      "bytes": 13280,
+      "endpoint": "/recruiting/teams",
+      "fetchedAt": "2026-10-13T00:59:32.318Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 221,
+      "source": "cfbd"
+    },
+    "season/recruits.json.gz": {
+      "bytes": 1469539,
+      "endpoint": "/recruiting/players",
+      "fetchedAt": "2026-10-13T00:59:32.893Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 3987,
+      "source": "cfbd"
+    },
+    "season/returning-production.json": {
+      "bytes": 43892,
+      "endpoint": "/player/returning",
+      "fetchedAt": "2026-10-13T00:59:34.407Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 136,
+      "source": "cfbd"
+    },
+    "season/roster.json.gz": {
+      "bytes": 9356552,
+      "endpoint": "/roster",
+      "fetchedAt": "2026-10-13T00:59:37.125Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 31479,
+      "source": "cfbd"
+    },
+    "season/talent.json": {
+      "bytes": 6832,
+      "endpoint": "/talent",
+      "fetchedAt": "2026-10-13T00:59:34.059Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/team-ats.json": {
+      "bytes": 37023,
+      "endpoint": "/teams/ats",
+      "fetchedAt": "2026-10-13T00:59:30.791Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 266,
+      "source": "cfbd"
+    },
+    "season/team-ppa.json": {
+      "bytes": 54610,
+      "endpoint": "/ppa/teams",
+      "fetchedAt": "2026-10-13T00:59:14.248Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/team-season-advanced.json": {
+      "bytes": 338624,
+      "endpoint": "/stats/season/advanced",
+      "fetchedAt": "2026-10-13T00:59:00.933Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/team-season-stats.json": {
+      "bytes": 916410,
+      "endpoint": "/stats/season",
+      "fetchedAt": "2026-10-13T00:58:55.714Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 8655,
+      "source": "cfbd"
+    },
+    "season/teams-fbs.json": {
+      "bytes": 202966,
+      "endpoint": "/teams/fbs",
+      "fetchedAt": "2026-10-13T00:58:52.748Z",
+      "rows": 138,
+      "source": "cfbd"
+    },
+    "season/transfer-portal.json": {
+      "bytes": 954439,
+      "endpoint": "/player/portal",
+      "fetchedAt": "2026-10-13T00:59:35.061Z",
+      "params": {
+        "year": 2026
+      },
+      "rows": 4474,
+      "source": "cfbd"
+    }
+  },
+  "lastFailures": [
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=1&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-01/weather"
+    },
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=2&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-02/weather"
+    },
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=3&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-03/weather"
+    },
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=4&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-04/weather"
+    },
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=5&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-05/weather"
+    },
+    {
+      "error": "HTTP 401 for https://api.collegefootballdata.com/games/weather?year=2026&week=6&seasonType=regular — {\"message\":\"Unauthorized. This endpoint requires a Patreon subscription at Tier 1 or higher.\"}",
+      "label": "regular-week-06/weather"
+    }
+  ],
+  "lastSkipped": [
+    {
+      "label": "wepa-team",
+      "reason": "HTTP 401 (likely needs a CFBD Patreon tier)"
+    },
+    {
+      "label": "wepa-passing",
+      "reason": "HTTP 401 (likely needs a CFBD Patreon tier)"
+    },
+    {
+      "label": "wepa-rushing",
+      "reason": "HTTP 401 (likely needs a CFBD Patreon tier)"
+    },
+    {
+      "label": "wepa-kicking",
+      "reason": "HTTP 401 (likely needs a CFBD Patreon tier)"
+    }
+  ],
+  "runs": [
+    {
+      "at": "2026-10-13T00:58:51.917Z",
+      "cfbdCalls": 126,
+      "failures": 6,
+      "seasonFiles": true,
+      "seasonType": "regular",
+      "skipped": 4,
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ]
+}
