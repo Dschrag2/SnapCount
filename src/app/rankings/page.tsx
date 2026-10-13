@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { getFbsTeams, getPolls, getRatings, latestSeason, weekFolders, type WeekFolder } from "@/lib/data";
 import { buildPollViews, type PollView } from "@/lib/rankings";
-import { buildRatingRows, RATING_LABELS, RATING_SYSTEMS, withMovement, type RatingRow } from "@/lib/ratings";
+import {
+  buildRatingRows,
+  RATING_LABELS,
+  RATING_SYSTEMS,
+  withComposite,
+  withCompositeMovement,
+  withMovement,
+  type RatingRow,
+} from "@/lib/ratings";
 import { Movement } from "@/components/movement";
 import { RatingsTable } from "@/components/ratings-table";
 
@@ -31,12 +39,13 @@ export default async function RankingsPage() {
   for (const w of [...folders].reverse()) {
     const r = await getRatings(season, w.folder);
     if (!r.sp && !r.fpi && !r.srs) continue;
-    withData.push({ w, rows: buildRatingRows(r.sp, r.fpi, r.srs, fbs) });
+    withData.push({ w, rows: withComposite(buildRatingRows(r.sp, r.fpi, r.srs, fbs)) });
     if (withData.length === 2) break;
   }
   const ratingsWeek = withData[0]?.w ?? null;
   const prevWeek = withData[1]?.w ?? null;
-  const ratings = withData[0] ? withMovement(withData[0].rows, withData[1]?.rows ?? null) : [];
+  const prevRows = withData[1]?.rows ?? null;
+  const ratings = withData[0] ? withCompositeMovement(withMovement(withData[0].rows, prevRows), prevRows) : [];
   const missing = new Set(RATING_SYSTEMS.filter((s) => ratings.length > 0 && ratings.every((r) => r[s] === null)));
 
   return (
@@ -46,7 +55,7 @@ export default async function RankingsPage() {
         <h1 className="font-display uppercase text-4xl sm:text-5xl tracking-tight">Rankings</h1>
         <p className="text-muted max-w-2xl">
           The human polls side by side, with movement from each poll&apos;s previous release, then the
-          computer ratings for every FBS team. The Snap Count composite is next.
+          Snap Count composite and the computer ratings behind it for every FBS team.
         </p>
       </header>
 
@@ -93,11 +102,14 @@ export default async function RankingsPage() {
       {ratingsWeek && (
         <section className="space-y-4">
           <div className="space-y-2">
-            <h2 className="font-display uppercase text-2xl sm:text-3xl tracking-tight">Computer ratings</h2>
+            <h2 className="font-display uppercase text-2xl sm:text-3xl tracking-tight">
+              Snap Count composite
+            </h2>
             <p className="text-muted max-w-2xl">
-              SP+, ESPN&apos;s FPI and SRS for all FBS teams, ranked among FBS only. Each number is the
-              system&apos;s rating, roughly points better than an average team on a neutral field, with its
-              rank beside it.
+              An equal-weight blend of SP+, ESPN&apos;s FPI and SRS. Each system&apos;s ratings are
+              normalized across FBS so none outweighs the others, averaged, then rescaled to the same
+              spread as the inputs — so like them, it reads as roughly points better than an average FBS
+              team on a neutral field. All ranks are among FBS only.
             </p>
             <p className="font-mono text-xs text-muted uppercase tracking-wider">
               After {weekLabel(ratingsWeek)}

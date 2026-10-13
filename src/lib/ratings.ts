@@ -16,12 +16,19 @@ export type RatingCell = {
   change: number | null;
 };
 
+export type CompositeCell = RatingCell & {
+  /** How many of the three systems fed this team's composite. */
+  systems: number;
+};
+
 export type RatingRow = {
   team: string;
   conference: string | null;
   sp: RatingCell | null;
   fpi: RatingCell | null;
   srs: RatingCell | null;
+  /** Snap Count composite — filled in by withComposite(). */
+  composite?: CompositeCell | null;
 };
 
 type Raw = { team: string; conference: string | null; value: number };
@@ -119,5 +126,81 @@ export function withMovement(current: RatingRow[], previous: RatingRow[] | null)
       if (now && then) out[s] = { ...now, change: then.rank - now.rank };
     }
     return out;
+  });
+}
+
+// ── Snap Count composite ──────────────────────────────────────────────
+
+const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+const stdev = (xs: number[]) => {
+  const m = mean(xs);
+  return Math.sqrt(mean(xs.map((x) => (x - m) ** 2)));
+};
+
+/**
+ * Snap Count composite v1: an equal-weight average of SP+, FPI and SRS.
+ *
+ * 1. Normalize — turn each system's rating into a z-score across FBS teams
+ *    (standard deviations above/below that system's FBS average), so a system
+ *    with a wider scale doesn't outweigh the others.
+ * 2. Average each team's z-scores over the systems that rated it. A team needs
+ *    at least two systems when two or more exist that week.
+ * 3. Spread back out — averaging pulls numbers toward zero, so the averages are
+ *    rescaled to the systems' typical standard deviation. The result reads like
+ *    the inputs: roughly points better than an average FBS team.
+ *
+ * Kept as one pure function so a trained model can replace it later.
+ */
+export function withComposite(rows: RatingRow[]): RatingRow[] {
+  const present = RATING_SYSTEMS.filter((s) => rows.some((r) => r[s]));
+  if (present.length === 0) return rows.map((r) => ({ ...r, composite: null }));
+  const minSystems = Math.min(2, present.length);
+
+  const stats = new Map(
+    present.map((s) => {
+      const vals = rows.flatMap((r) => (r[s] ? [r[s]!.value] : []));
+      return [s, { mean: mean(vals), sd: stdev(vals) || 1 }];
+    }),
+  );
+
+  const avgZ = new Map<string, { z: number; n: number }>();
+  for (const r of rows) {
+    const zs = present.flatMap((s) => {
+      const c = r[s];
+      const st = stats.get(s)!;
+      return c ? [(c.value - st.mean) / st.sd] : [];
+    });
+    if (zs.length >= minSystems) avgZ.set(r.team, { z: mean(zs), n: zs.length });
+  }
+
+  const zSd = stdev([...avgZ.values()].map((v) => v.z)) || 1;
+  const scale = mean(present.map((s) => stats.get(s)!.sd));
+  const scored = [...avgZ].map(([team, { z, n }]) => ({ team, value: (z / zSd) * scale, n }));
+  const ranks = rank(scored.map((x) => ({ team: x.team, conference: null, value: x.value })));
+  const systems = new Map(scored.map((x) => [x.team, x.n]));
+
+  const key = (r: RatingRow) => r.composite?.rank ?? Number.POSITIVE_INFINITY;
+  return rows
+    .map((r) => {
+      const c = ranks.get(r.team);
+      return { ...r, composite: c ? { ...c, systems: systems.get(r.team)! } : null };
+    })
+    .sort((a, b) => key(a) - key(b) || a.team.localeCompare(b.team));
+}
+
+/**
+ * Composite movement vs. last week — only when last week's composite used the
+ * same systems, so a change in inputs isn't shown as a team moving.
+ */
+export function withCompositeMovement(current: RatingRow[], previous: RatingRow[] | null): RatingRow[] {
+  if (!previous) return current;
+  const sameInputs = RATING_SYSTEMS.every(
+    (s) => current.some((r) => r[s]) === previous.some((r) => r[s]),
+  );
+  if (!sameInputs) return current;
+  const prev = new Map(previous.map((r) => [r.team, r.composite?.rank]));
+  return current.map((r) => {
+    const before = prev.get(r.team);
+    return r.composite && before ? { ...r, composite: { ...r.composite, change: before - r.composite.rank } } : r;
   });
 }
