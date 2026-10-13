@@ -5,16 +5,30 @@ const PREVIEW = 25;
 function Cell({ cell }: { cell: RatingCell | null }) {
   if (!cell) {
     return (
-      <td className="py-1.5 pr-3 sm:pr-[3.25rem] text-right font-mono text-muted">
+      <td className="py-1.5 pr-3 sm:pr-[5.25rem] text-right font-mono text-muted">
         <span aria-label="Not rated">—</span>
       </td>
     );
   }
   // Phones: rank stacks under the rating so all three systems fit. sm+: rank sits to the right.
+  // Movement only shows when the team actually moved; green/red mean up/down in rank.
+  const moved = cell.change !== null && cell.change !== 0;
+  const up = (cell.change ?? 0) > 0;
   return (
     <td className="py-1.5 pr-3 sm:pr-4 text-right font-mono tabular whitespace-nowrap">
       <span className="block sm:inline">{cell.value.toFixed(1)}</span>
-      <span className="block sm:inline-block sm:w-9 text-xs text-muted">#{cell.rank}</span>
+      <span className="block sm:inline-block sm:w-[4.25rem] sm:pl-2 sm:text-left text-xs text-muted">
+        #{cell.rank}
+        {moved && (
+          <span
+            className={`ml-1 text-[0.65rem] ${up ? "text-up" : "text-down"}`}
+            aria-label={`${up ? "up" : "down"} ${Math.abs(cell.change!)} from last week`}
+          >
+            {up ? "▲" : "▼"}
+            {Math.abs(cell.change!)}
+          </span>
+        )}
+      </span>
     </td>
   );
 }
@@ -46,9 +60,9 @@ function Cols() {
     <colgroup>
       <col className="w-9 sm:w-12" />
       <col />
-      <col className="w-16 sm:w-28" />
-      <col className="w-16 sm:w-28" />
-      <col className="w-16 sm:w-28" />
+      <col className="w-16 sm:w-32" />
+      <col className="w-16 sm:w-32" />
+      <col className="w-16 sm:w-32" />
     </colgroup>
   );
 }
@@ -62,7 +76,7 @@ function Head({ missing }: { missing: Set<RatingSystem> }) {
         </th>
         <th className="py-2 pr-3 text-left font-normal">Team</th>
         {RATING_SYSTEMS.map((s) => (
-          <th key={s} className="py-2 pr-3 sm:pr-[3.25rem] text-right font-normal">
+          <th key={s} className="py-2 pr-3 sm:pr-[5.25rem] text-right font-normal">
             {RATING_LABELS[s]}
             {missing.has(s) && <span className="sr-only"> (unavailable)</span>}
           </th>

@@ -9,7 +9,12 @@ export const RATING_LABELS: Record<RatingSystem, string> = {
   srs: "SRS",
 };
 
-export type RatingCell = { value: number; rank: number };
+export type RatingCell = {
+  value: number;
+  rank: number;
+  /** Rank change vs. the previous week's file (positive = moved up). null = no previous data. */
+  change: number | null;
+};
 
 export type RatingRow = {
   team: string;
@@ -32,7 +37,7 @@ function rank(entries: Raw[]): Map<string, RatingCell> {
   sorted.forEach((e, i) => {
     const prev = i > 0 ? sorted[i - 1] : null;
     const r = prev && prev.value === e.value ? out.get(prev.team)!.rank : i + 1;
-    out.set(e.team, { value: e.value, rank: r });
+    out.set(e.team, { value: e.value, rank: r, change: null });
   });
   return out;
 }
@@ -41,12 +46,15 @@ function rank(entries: Raw[]): Map<string, RatingCell> {
  * Join SP+, FPI and SRS into one row per FBS team. Any source may be null
  * (failed or not yet published) — the others still render.
  *
- * Every rank is recomputed among FBS teams only.
+ * Every rank is recomputed among FBS teams only. Pass `fbs` (school → conference,
+ * from the saved FBS team list) to decide membership authoritatively; without it,
+ * membership is inferred from the ratings themselves.
  */
 export function buildRatingRows(
   sp: SpRating[] | null,
   fpi: FpiRating[] | null,
   srs: SrsRating[] | null,
+  fbs?: Map<string, string | null> | null,
 ): RatingRow[] {
   const spRaw: Raw[] = (sp ?? [])
     .filter((r) => r.ranking !== null && r.team !== "nationalAverages")
@@ -59,10 +67,12 @@ export function buildRatingRows(
   // FBS membership: SP+ is FBS-only; FPI stands in if SP+ is missing. SRS also
   // covers FCS, and its `division` field is often null, so an SRS team counts
   // as FBS if it's labeled "fbs" OR already appears in SP+/FPI.
-  const conference = new Map<string, string | null>();
-  for (const e of spRaw.length ? spRaw : fpiRaw) conference.set(e.team, e.conference);
+  const conference = new Map<string, string | null>(fbs ?? []);
+  if (!fbs?.size) for (const e of spRaw.length ? spRaw : fpiRaw) conference.set(e.team, e.conference);
   for (const r of srsRaw) {
-    if (r.division?.toLowerCase() === "fbs" && !conference.has(r.team)) conference.set(r.team, r.conference);
+    if (!fbs?.size && r.division?.toLowerCase() === "fbs" && !conference.has(r.team)) {
+      conference.set(r.team, r.conference);
+    }
   }
   // Last resort (SP+ and FPI both down, SRS unlabeled): take SRS as-is.
   if (conference.size === 0) for (const r of srsRaw) conference.set(r.team, r.conference);
@@ -91,4 +101,23 @@ export function buildRatingRows(
       key(a.srs) - key(b.srs) ||
       a.team.localeCompare(b.team),
   );
+}
+
+/**
+ * Fill in each cell's week-over-week rank change from the previous week's rows.
+ * A system with no previous data keeps change = null (nothing is shown).
+ */
+export function withMovement(current: RatingRow[], previous: RatingRow[] | null): RatingRow[] {
+  if (!previous) return current;
+  const prev = new Map(previous.map((r) => [r.team, r]));
+  return current.map((row) => {
+    const before = prev.get(row.team);
+    const out = { ...row };
+    for (const s of RATING_SYSTEMS) {
+      const now = row[s];
+      const then = before?.[s];
+      if (now && then) out[s] = { ...now, change: then.rank - now.rank };
+    }
+    return out;
+  });
 }

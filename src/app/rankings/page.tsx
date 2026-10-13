@@ -1,60 +1,48 @@
 import type { Metadata } from "next";
-import { CfbdConfigError, getFpiRatings, getRankings, getSpRatings, getSrsRatings } from "@/lib/cfbd";
+import { getFbsTeams, getPolls, getRatings, latestSeason, weekFolders, type WeekFolder } from "@/lib/data";
 import { buildPollViews, type PollView } from "@/lib/rankings";
-import { buildRatingRows, RATING_LABELS, RATING_SYSTEMS, type RatingRow, type RatingSystem } from "@/lib/ratings";
+import { buildRatingRows, RATING_LABELS, RATING_SYSTEMS, withMovement, type RatingRow } from "@/lib/ratings";
 import { Movement } from "@/components/movement";
 import { RatingsTable } from "@/components/ratings-table";
 
 export const metadata: Metadata = { title: "Rankings" };
 
-// Re-render at most every 6 hours; polls change weekly.
-export const revalidate = 21600;
+// Everything here comes from data/ files written by the weekly ingest
+// (scripts/ingest.mjs), so the page renders at build time and costs no API calls.
 
-const SEASON = Number(process.env.CFBD_SEASON ?? new Date().getFullYear());
+const weekLabel = (w: WeekFolder) => (w.seasonType === "postseason" ? `bowl week ${w.week}` : `week ${w.week}`);
 
 export default async function RankingsPage() {
-  let views: PollView[] = [];
-  let ratings: RatingRow[] = [];
-  const missing = new Set<RatingSystem>();
-  const empty: RatingSystem[] = [];
-  let error: string | null = null;
-
-  // Fetch all four in parallel; one source failing shouldn't blank the page.
-  const [polls, sp, fpi, srs] = await Promise.allSettled([
-    getRankings(SEASON),
-    getSpRatings(SEASON),
-    getFpiRatings(SEASON),
-    getSrsRatings(SEASON),
-  ]);
-
-  const configError = [polls, sp, fpi, srs].find(
-    (r) => r.status === "rejected" && r.reason instanceof CfbdConfigError,
-  );
-  if (configError) {
-    error = (configError as PromiseRejectedResult).reason.message;
-  } else {
-    if (polls.status === "fulfilled") views = buildPollViews(polls.value);
-    const ok = <T,>(r: PromiseSettledResult<T>, s: RatingSystem) => {
-      if (r.status === "fulfilled") return r.value;
-      console.error(`CFBD ${RATING_LABELS[s]} failed`, r.reason);
-      missing.add(s);
-      return null;
-    };
-    ratings = buildRatingRows(ok(sp, "sp"), ok(fpi, "fpi"), ok(srs, "srs"));
-    // Loaded fine but nothing rated yet (e.g. not published for this season).
-    for (const s of RATING_SYSTEMS) {
-      if (!missing.has(s) && ratings.length > 0 && ratings.every((r) => r[s] === null)) empty.push(s);
-    }
-    if (polls.status === "rejected") {
-      console.error(polls.reason);
-      if (ratings.length === 0) error = "Couldn't reach CollegeFootballData.com right now.";
-    }
+  const season = await latestSeason();
+  if (season === null) {
+    return (
+      <p className="text-muted">
+        No data yet. Run the <span className="font-mono">Ingest data</span> workflow (or{" "}
+        <span className="font-mono">npm run ingest</span>) to pull it.
+      </p>
+    );
   }
+
+  const [polls, fbs, folders] = await Promise.all([getPolls(season), getFbsTeams(season), weekFolders(season)]);
+  const views: PollView[] = polls ? buildPollViews(polls) : [];
+
+  // Ratings: the latest week folder that has any, plus the one before it for movement.
+  const withData: { w: WeekFolder; rows: RatingRow[] }[] = [];
+  for (const w of [...folders].reverse()) {
+    const r = await getRatings(season, w.folder);
+    if (!r.sp && !r.fpi && !r.srs) continue;
+    withData.push({ w, rows: buildRatingRows(r.sp, r.fpi, r.srs, fbs) });
+    if (withData.length === 2) break;
+  }
+  const ratingsWeek = withData[0]?.w ?? null;
+  const prevWeek = withData[1]?.w ?? null;
+  const ratings = withData[0] ? withMovement(withData[0].rows, withData[1]?.rows ?? null) : [];
+  const missing = new Set(RATING_SYSTEMS.filter((s) => ratings.length > 0 && ratings.every((r) => r[s] === null)));
 
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <p className="font-mono text-sm text-accent uppercase tracking-widest">{SEASON} season</p>
+        <p className="font-mono text-sm text-accent uppercase tracking-widest">{season} season</p>
         <h1 className="font-display uppercase text-4xl sm:text-5xl tracking-tight">Rankings</h1>
         <p className="text-muted max-w-2xl">
           The human polls side by side, with movement from each poll&apos;s previous release, then the
@@ -62,15 +50,7 @@ export default async function RankingsPage() {
         </p>
       </header>
 
-      {error && (
-        <div className="bg-panel border border-line rounded-lg p-5 font-mono text-sm">
-          {error}
-        </div>
-      )}
-
-      {!error && views.length === 0 && polls.status === "fulfilled" && (
-        <p className="text-muted">No polls published for {SEASON} yet.</p>
-      )}
+      {views.length === 0 && <p className="text-muted">No polls in the data for {season} yet.</p>}
 
       <div className="grid gap-6 lg:grid-cols-3">
         {views.map((v) => (
@@ -110,7 +90,7 @@ export default async function RankingsPage() {
         ))}
       </div>
 
-      {!error && (
+      {ratingsWeek && (
         <section className="space-y-4">
           <div className="space-y-2">
             <h2 className="font-display uppercase text-2xl sm:text-3xl tracking-tight">Computer ratings</h2>
@@ -119,22 +99,17 @@ export default async function RankingsPage() {
               system&apos;s rating, roughly points better than an average team on a neutral field, with its
               rank beside it.
             </p>
+            <p className="font-mono text-xs text-muted uppercase tracking-wider">
+              After {weekLabel(ratingsWeek)}
+              {prevWeek ? ` · arrows show rank change since ${weekLabel(prevWeek)}` : ""}
+            </p>
           </div>
           {missing.size > 0 && (
             <p className="font-mono text-sm text-muted">
-              {[...missing].map((s) => RATING_LABELS[s]).join(", ")} unavailable right now.
+              {[...missing].map((x) => RATING_LABELS[x]).join(", ")}: not in the data for {weekLabel(ratingsWeek)}.
             </p>
           )}
-          {empty.length > 0 && (
-            <p className="font-mono text-sm text-muted">
-              {empty.map((s) => RATING_LABELS[s]).join(", ")}: no {SEASON} ratings published yet.
-            </p>
-          )}
-          {ratings.length > 0 ? (
-            <RatingsTable rows={ratings} missing={missing} />
-          ) : (
-            <p className="text-muted">No computer ratings published for {SEASON} yet.</p>
-          )}
+          <RatingsTable rows={ratings} missing={missing} />
         </section>
       )}
     </div>

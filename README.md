@@ -21,11 +21,10 @@ Requires Node 20+.
 
 ```bash
 npm install
-cp .env.example .env.local   # then paste your free CFBD key
 npm run dev                  # http://localhost:3000
 ```
 
-Get a free CFBD API key at <https://collegefootballdata.com/key>.
+The site reads everything from the `data/` folder (see below), so it needs no API key to run. A free CFBD key — <https://collegefootballdata.com/key>, saved in `.env.local` as `CFBD_API_KEY` — is only needed to run the data pipeline yourself.
 
 ## Data pipeline
 
