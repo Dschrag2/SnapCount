@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { CfbdConfigError, getRankings } from "@/lib/cfbd";
+import { CfbdConfigError, getFpiRatings, getRankings, getSpRatings, getSrsRatings } from "@/lib/cfbd";
 import { buildPollViews, type PollView } from "@/lib/rankings";
+import { buildRatingRows, RATING_LABELS, type RatingRow, type RatingSystem } from "@/lib/ratings";
 import { Movement } from "@/components/movement";
+import { RatingsTable } from "@/components/ratings-table";
 
 export const metadata: Metadata = { title: "Rankings" };
 
@@ -12,13 +14,36 @@ const SEASON = Number(process.env.CFBD_SEASON ?? new Date().getFullYear());
 
 export default async function RankingsPage() {
   let views: PollView[] = [];
+  let ratings: RatingRow[] = [];
+  const missing = new Set<RatingSystem>();
   let error: string | null = null;
 
-  try {
-    views = buildPollViews(await getRankings(SEASON));
-  } catch (e) {
-    error = e instanceof CfbdConfigError ? e.message : "Couldn't reach CollegeFootballData.com right now.";
-    if (!(e instanceof CfbdConfigError)) console.error(e);
+  // Fetch all four in parallel; one source failing shouldn't blank the page.
+  const [polls, sp, fpi, srs] = await Promise.allSettled([
+    getRankings(SEASON),
+    getSpRatings(SEASON),
+    getFpiRatings(SEASON),
+    getSrsRatings(SEASON),
+  ]);
+
+  const configError = [polls, sp, fpi, srs].find(
+    (r) => r.status === "rejected" && r.reason instanceof CfbdConfigError,
+  );
+  if (configError) {
+    error = (configError as PromiseRejectedResult).reason.message;
+  } else {
+    if (polls.status === "fulfilled") views = buildPollViews(polls.value);
+    const ok = <T,>(r: PromiseSettledResult<T>, s: RatingSystem) => {
+      if (r.status === "fulfilled") return r.value;
+      console.error(`CFBD ${RATING_LABELS[s]} failed`, r.reason);
+      missing.add(s);
+      return null;
+    };
+    ratings = buildRatingRows(ok(sp, "sp"), ok(fpi, "fpi"), ok(srs, "srs"));
+    if (polls.status === "rejected") {
+      console.error(polls.reason);
+      if (ratings.length === 0) error = "Couldn't reach CollegeFootballData.com right now.";
+    }
   }
 
   return (
@@ -27,8 +52,8 @@ export default async function RankingsPage() {
         <p className="font-mono text-sm text-accent uppercase tracking-widest">{SEASON} season</p>
         <h1 className="font-display uppercase text-4xl sm:text-5xl tracking-tight">Rankings</h1>
         <p className="text-muted max-w-2xl">
-          The human polls side by side, with movement from each poll&apos;s previous release. Computer
-          ratings and the Snap Count composite are next.
+          The human polls side by side, with movement from each poll&apos;s previous release, then the
+          computer ratings for every FBS team. The Snap Count composite is next.
         </p>
       </header>
 
@@ -38,7 +63,7 @@ export default async function RankingsPage() {
         </div>
       )}
 
-      {!error && views.length === 0 && (
+      {!error && views.length === 0 && polls.status === "fulfilled" && (
         <p className="text-muted">No polls published for {SEASON} yet.</p>
       )}
 
@@ -79,6 +104,29 @@ export default async function RankingsPage() {
           </section>
         ))}
       </div>
+
+      {!error && (
+        <section className="space-y-4">
+          <div className="space-y-2">
+            <h2 className="font-display uppercase text-2xl sm:text-3xl tracking-tight">Computer ratings</h2>
+            <p className="text-muted max-w-2xl">
+              SP+, ESPN&apos;s FPI and SRS for all FBS teams, ranked among FBS only. Each number is the
+              system&apos;s rating, roughly points better than an average team on a neutral field, with its
+              rank beside it.
+            </p>
+          </div>
+          {missing.size > 0 && (
+            <p className="font-mono text-sm text-muted">
+              {[...missing].map((s) => RATING_LABELS[s]).join(", ")} unavailable right now.
+            </p>
+          )}
+          {ratings.length > 0 ? (
+            <RatingsTable rows={ratings} missing={missing} />
+          ) : (
+            <p className="text-muted">No computer ratings published for {SEASON} yet.</p>
+          )}
+        </section>
+      )}
     </div>
   );
 }

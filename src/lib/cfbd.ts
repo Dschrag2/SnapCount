@@ -52,7 +52,47 @@ export type RankingsWeek = {
   polls: Poll[];
 };
 
+/** SP+ (Bill Connelly). Includes a `nationalAverages` row with a null ranking. */
+export type SpRating = {
+  year: number;
+  team: string;
+  conference: string | null;
+  rating: number;
+  ranking: number | null;
+};
+
+/** ESPN Football Power Index. */
+export type FpiRating = {
+  year: number;
+  team: string;
+  conference: string | null;
+  fpi: number | null;
+  resumeRanks?: { fpi: number | null } | null;
+};
+
+/** Simple Rating System (margin of victory adjusted for schedule). Covers FBS and FCS. */
+export type SrsRating = {
+  year: number;
+  team: string;
+  conference: string | null;
+  division: string | null;
+  rating: number;
+  ranking: number | null;
+};
+
 // ── Endpoints ─────────────────────────────────────────────────────────
+
+export function getSpRatings(year: number) {
+  return cfbd<SpRating[]>("/ratings/sp", { year });
+}
+
+export function getFpiRatings(year: number) {
+  return cfbd<FpiRating[]>("/ratings/fpi", { year });
+}
+
+export function getSrsRatings(year: number) {
+  return cfbd<SrsRating[]>("/ratings/srs", { year });
+}
 
 /** All poll weeks for a season (AP, Coaches, CFP, FCS, …). */
 export function getRankings(year: number, seasonType: "regular" | "postseason" = "regular") {
