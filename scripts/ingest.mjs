@@ -89,7 +89,7 @@ const WEEK_ENDPOINTS = [
   { name: "elo", path: "/ratings/elo" },
   { name: "lines", path: "/lines" },
   { name: "pregame-wp", path: "/metrics/wp/pregame" },
-  { name: "weather", path: "/games/weather" },
+  { name: "weather", path: "/games/weather", tier: true },
 ];
 
 /** "As of now" only — saved into the latest completed week's folder. */
@@ -146,6 +146,7 @@ class HttpError extends Error {
   constructor(status, url, body) {
     super(`HTTP ${status} for ${url}${body ? ` — ${body.slice(0, 200)}` : ""}`);
     this.status = status;
+    this.body = body ?? "";
   }
 }
 
@@ -221,8 +222,10 @@ async function attempt(label, isTier, fn) {
     await fn();
   } catch (e) {
     const status = e instanceof HttpError ? e.status : null;
-    if (isTier && (status === 401 || status === 403)) {
-      skipped.push({ label, reason: `HTTP ${status} (likely needs a CFBD Patreon tier)` });
+    // CFBD answers 401 "This endpoint requires a Patreon subscription" for paid endpoints.
+    const patreon = e instanceof HttpError && /patreon/i.test(e.body);
+    if ((isTier || patreon) && (status === 401 || status === 403)) {
+      skipped.push({ label, reason: `HTTP ${status} (needs a CFBD Patreon tier)` });
       console.log(`  – ${label}: skipped, HTTP ${status} (tier-gated)`);
     } else {
       failures.push({ label, error: e.message });
