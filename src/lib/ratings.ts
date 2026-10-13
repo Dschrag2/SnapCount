@@ -41,8 +41,7 @@ function rank(entries: Raw[]): Map<string, RatingCell> {
  * Join SP+, FPI and SRS into one row per FBS team. Any source may be null
  * (failed or not yet published) — the others still render.
  *
- * FBS membership comes from SRS's division field plus SP+'s ranked teams
- * (SP+ is FBS-only); FPI is used only if neither is available.
+ * Every rank is recomputed among FBS teams only.
  */
 export function buildRatingRows(
   sp: SpRating[] | null,
@@ -52,21 +51,28 @@ export function buildRatingRows(
   const spRaw: Raw[] = (sp ?? [])
     .filter((r) => r.ranking !== null && r.team !== "nationalAverages")
     .map((r) => ({ team: r.team, conference: r.conference, value: r.rating }));
-  const srsFbs: Raw[] = (srs ?? [])
-    .filter((r) => r.division?.toLowerCase() === "fbs")
-    .map((r) => ({ team: r.team, conference: r.conference, value: r.rating }));
   const fpiRaw: Raw[] = (fpi ?? [])
     .filter((r): r is FpiRating & { fpi: number } => typeof r.fpi === "number")
     .map((r) => ({ team: r.team, conference: r.conference, value: r.fpi }));
+  const srsRaw = (srs ?? []).filter((r) => typeof r.rating === "number");
 
+  // FBS membership: SP+ is FBS-only; FPI stands in if SP+ is missing. SRS also
+  // covers FCS, and its `division` field is often null, so an SRS team counts
+  // as FBS if it's labeled "fbs" OR already appears in SP+/FPI.
   const conference = new Map<string, string | null>();
-  for (const e of [...spRaw, ...srsFbs]) if (!conference.has(e.team)) conference.set(e.team, e.conference);
-  if (conference.size === 0) for (const e of fpiRaw) conference.set(e.team, e.conference);
+  for (const e of spRaw.length ? spRaw : fpiRaw) conference.set(e.team, e.conference);
+  for (const r of srsRaw) {
+    if (r.division?.toLowerCase() === "fbs" && !conference.has(r.team)) conference.set(r.team, r.conference);
+  }
+  // Last resort (SP+ and FPI both down, SRS unlabeled): take SRS as-is.
+  if (conference.size === 0) for (const r of srsRaw) conference.set(r.team, r.conference);
 
-  const isFbs = (e: Raw) => conference.has(e.team);
+  const isFbs = (e: { team: string }) => conference.has(e.team);
   const spRank = rank(spRaw.filter(isFbs));
   const fpiRank = rank(fpiRaw.filter(isFbs));
-  const srsRank = rank(srsFbs.filter(isFbs));
+  const srsRank = rank(
+    srsRaw.filter(isFbs).map((r) => ({ team: r.team, conference: r.conference, value: r.rating })),
+  );
 
   const rows: RatingRow[] = [...conference].map(([team, conf]) => ({
     team,

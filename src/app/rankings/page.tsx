@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CfbdConfigError, getFpiRatings, getRankings, getSpRatings, getSrsRatings } from "@/lib/cfbd";
 import { buildPollViews, type PollView } from "@/lib/rankings";
-import { buildRatingRows, RATING_LABELS, type RatingRow, type RatingSystem } from "@/lib/ratings";
+import { buildRatingRows, RATING_LABELS, RATING_SYSTEMS, type RatingRow, type RatingSystem } from "@/lib/ratings";
 import { Movement } from "@/components/movement";
 import { RatingsTable } from "@/components/ratings-table";
 
@@ -16,6 +16,7 @@ export default async function RankingsPage() {
   let views: PollView[] = [];
   let ratings: RatingRow[] = [];
   const missing = new Set<RatingSystem>();
+  const empty: RatingSystem[] = [];
   let error: string | null = null;
 
   // Fetch all four in parallel; one source failing shouldn't blank the page.
@@ -40,6 +41,10 @@ export default async function RankingsPage() {
       return null;
     };
     ratings = buildRatingRows(ok(sp, "sp"), ok(fpi, "fpi"), ok(srs, "srs"));
+    // Loaded fine but nothing rated yet (e.g. not published for this season).
+    for (const s of RATING_SYSTEMS) {
+      if (!missing.has(s) && ratings.length > 0 && ratings.every((r) => r[s] === null)) empty.push(s);
+    }
     if (polls.status === "rejected") {
       console.error(polls.reason);
       if (ratings.length === 0) error = "Couldn't reach CollegeFootballData.com right now.";
@@ -118,6 +123,11 @@ export default async function RankingsPage() {
           {missing.size > 0 && (
             <p className="font-mono text-sm text-muted">
               {[...missing].map((s) => RATING_LABELS[s]).join(", ")} unavailable right now.
+            </p>
+          )}
+          {empty.length > 0 && (
+            <p className="font-mono text-sm text-muted">
+              {empty.map((s) => RATING_LABELS[s]).join(", ")}: no {SEASON} ratings published yet.
             </p>
           )}
           {ratings.length > 0 ? (
