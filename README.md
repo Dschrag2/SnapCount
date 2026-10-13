@@ -27,8 +27,6 @@ npm run dev                  # http://localhost:3000
 
 Get a free CFBD API key at <https://collegefootballdata.com/key>.
 
-For the scheduled workflow in `.github/workflows/ingest.yml`, add the same key as a repository secret named `CFBD_API_KEY` (Settings → Secrets and variables → Actions).
-
 ## License
 
 [MIT](LICENSE)
